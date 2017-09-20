@@ -1,7 +1,7 @@
 
 $( document ).ready(function(){
 
-	//Materialize JS
+
 
   //modal
   $(".modal").modal({
@@ -40,17 +40,37 @@ $( document ).ready(function(){
       return true;
   })
 
-
   $(".modal").modal("open"); //open modal on doc ready
 
+
+  //Materialize JS
 	$(".button-collapse").sideNav(); //initialize mobile format
 
 	$('select').material_select(); //initialize multiple selection drop-down menu
 
-if ()
 
+  //BreweryDB
+  $("#style-listener").change(function(){
+    console.log("Listener for Style Finder");
+    var style = $(this).attr("data-name");
+    var queryURL = "http://api.brewerydb.com/v2/search?q=" + style + "&key=key=0b0c6173e7c109d3992ead7165d4dda1"
 
+    //AJAX request
+    $.ajax({
+      url:queryURL,
+      method: "GET"
+    })  
+    .done(function(response){
+      var results = response.data;
+      console.log(results);
 
+    //variable to hold info -- for loop?
+
+    //store info
+
+    //append info
+    })
+  });
 
 
 

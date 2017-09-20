@@ -183,102 +183,101 @@
 						<li class="tab col s6"><a href="#beerQuizSection">Beer Quiz</a></li>
 					</ul>
 				
-				<!--Style Selector-->
-				<div id="style-selector" class="input-field">
-					<select multiple>
-						<option value="" disabled selected>choose from options below</option>
-						<option value="noIdea">I have no idea!</option>
-						<option value="Ale">Ale</option>
-						<option value="Bock">Bock</option>
-						<option value="Dunkel">Dunkel</option>
-						<option value="Gose">Gose</option>
-						<option value="Hefeweizen">Hefeweizen</option>
-						<option value="Helles">Helles</option>
-						<option value="IPA">IPA</option>
-						<option value="Kolsch">Kolsch</option>
-						<option value="Lager">Lager</option>
-						<option value="Pale Ale">Pale Ale</option>
-						<option value="Pils">Pils</option>
-						<option value="Porter">Porter</option>
-						<option value="Saison">Saison</option>
-						<option value="Stout">Stout</option>
-						<option value="Witbier">Witbier</option>
-						<option value="Wheat">Wheat</option>
+					<!--Style Selector-->
+					<div id="style-selector" class="input-field">
+						<select id="style-listener" multiple>
+							<option value="" disabled selected>choose from options below</option>
+							<option value="noIdea">I have no idea!</option>
+							<option value="Ale">Ale</option>
+							<option value="Bock">Bock</option>
+							<option value="Dunkel">Dunkel</option>
+							<option value="Gose">Gose</option>
+							<option value="Hefeweizen">Hefeweizen</option>
+							<option value="Helles">Helles</option>
+							<option value="IPA">IPA</option>
+							<option value="Kolsch">Kolsch</option>
+							<option value="Lager">Lager</option>
+							<option value="Pale Ale">Pale Ale</option>
+							<option value="Pils">Pils</option>
+							<option value="Porter">Porter</option>
+							<option value="Saison">Saison</option>
+							<option value="Stout">Stout</option>
+							<option value="Witbier">Witbier</option>
+							<option value="Wheat">Wheat</option>
+						</select>
+					</div>
 
-					</select>
-				</div>
+					<!--Beer Quiz-->					
+			        <div id="beerQuizSection">
+			          <div id="quizQuestionOne" class="input-field">
+			            <select>
+			              <option value="" disabled selected>How do you like your beer to look?</option>
+			              <option value="Lager">A snowy drift of head on a golden body. Basically, like a beer.</option>
+			              <option value="Ale">A huge head and a rustic haze.</option>
+			              <option value="Wheat">A touch of color.</option>
+			              <option value="Stout">Black, like a midnight sky.</option>
+			            </select>
+			          </div>
 
-        <div id="beerQuizSection">
+			          <div id="quizQuestionTwo" class="input-field">
+			            <select>
+			              <option value="" disabled selected>Are you a fan of strong or subtle flavors in your beer?</option>
+			              <option value="IPA">Is Everclear a possible beer flavor?</option>
+			              <option value="Saison">I like interesting, vivid flavors, but maybe not strong ones.</option>
+			              <option value="Kolsch">I enjoy balance and subtle flavors; my palate is just that good.</option>
+			              <option value="Lager">Give me ALL the flavors!</option>
+			            </select>
+			          </div>
 
-          <div id="quizQuestionOne" class="input-field">
-            <select>
-              <option value="" disabled selected>How do you like your beer to look?</option>
-              <option value="Lager">A snowy drift of head on a golden body. Basically, like a beer.</option>
-              <option value="Ale">A huge head and a rustic haze.</option>
-              <option value="Wheat">A touch of color.</option>
-              <option value="Stout">Black, like a midnight sky.</option>
-            </select>
-          </div>
+			          <div id="quizQuestionThree" class="input-field">
+			            <select>
+			              <option value="" disabled selected>How do you feel about sour flavors?</option>
+			              <option value="Gose">Love 'em.</option>
+			              <option value="Lager">No strong take either way.</option>
+			              <option value="Wheat">Hate 'em.</option>
+			            </select>
+			          </div>
 
-          <div id="quizQuestionTwo" class="input-field">
-            <select>
-              <option value="" disabled selected>Are you a fan of strong or subtle flavors in your beer?</option>
-              <option value="IPA">Is Everclear a possible beer flavor?</option>
-              <option value="Saison">I like interesting, vivid flavors, but maybe not strong ones.</option>
-              <option value="Kolsch">I enjoy balance and subtle flavors; my palate is just that good.</option>
-              <option value="Lager">Give me ALL the flavors!</option>
-            </select>
-          </div>
+			          <div id="quizQuestionFour" class="input-field">
+			            <select>
+			              <option value="" disabled selected>Do you prefer a heavy or light body?</option>
+			              <option value="Stout">Heavy.</option>
+			              <option value="Pils">Medium.</option>
+			              <option value="Lager">Light.</option>
+			            </select>
+			          </div>
 
-          <div id="quizQuestionThree" class="input-field">
-            <select>
-              <option value="" disabled selected>How do you feel about sour flavors?</option>
-              <option value="Gose">Love 'em.</option>
-              <option value="Lager">No strong take either way.</option>
-              <option value="Wheat">Hate 'em.</option>
-            </select>
-          </div>
+			          <div id="quizQuestionFive" class="input-field">
+			            <select>
+			              <option value="" disabled selected>What of these flavors most coincides with your preferences?</option>
+			              <option value="Saison">Sweet and rounded.</option>
+			              <option value="Kolsch">Light and flavorful.</option>
+			              <option value="Porter">Roasty and rich.</option>
+			              <option value="Saison">Citrusy, piney, and tropical.</option>
+			              <option value="IPA">Boozy and bold.</option>
+			            </select>
+			          </div>
 
-          <div id="quizQuestionFour" class="input-field">
-            <select>
-              <option value="" disabled selected>Do you prefer a heavy or light body?</option>
-              <option value="Stout">Heavy.</option>
-              <option value="Pils">Medium.</option>
-              <option value="Lager">Light.</option>
-            </select>
-          </div>
+			          <div id="quizQuestionSix" class="input-field">
+			            <select>
+			              <option value="" disabled selected>What kinds of aromas do you like?</option>
+			              <option value="Saison">Tropical fruit, citrus, or pine.</option>
+			              <option value="Lager">Nothing too strong; just a nice, beery aroma.</option>
+			              <option value="Hefeweizen">Fruit and spice: coriander, peaches, clove, banana, etc.</option>
+			              <option value="Porter">Chocolate, hazelnut, or coffee.</option>
+			              <option value="IPA">Everclear in beer form!</option>
+			            </select>
+			          </div>
 
-          <div id="quizQuestionFive" class="input-field">
-            <select>
-              <option value="" disabled selected>What of these flavors most coincides with your preferences?</option>
-              <option value="Saison">Sweet and rounded.</option>
-              <option value="Kolsch">Light and flavorful.</option>
-              <option value="Porter">Roasty and rich.</option>
-              <option value="Saison">Citrusy, piney, and tropical.</option>
-              <option value="IPA">Boozy and bold.</option>
-            </select>
-          </div>
-
-          <div id="quizQuestionSix" class="input-field">
-            <select>
-              <option value="" disabled selected>What kinds of aromas do you like?</option>
-              <option value="Saison">Tropical fruit, citrus, or pine.</option>
-              <option value="Lager">Nothing too strong; just a nice, beery aroma.</option>
-              <option value="Hefeweizen">Fruit and spice: coriander, peaches, clove, banana, etc.</option>
-              <option value="Porter">Chocolate, hazelnut, or coffee.</option>
-              <option value="IPA">Everclear in beer form!</option>
-            </select>
-          </div>
-
-          <div id="quizQuestionSeven" class="input-field">
-            <select>
-              <option value="" disabled selected>How do you feel about bitterness?</option>
-              <option value="Porter">If it's like the bitterness in coffee, I love it.</option>
-              <option value="Gose">If it's like the bitterness in kale, I love it.</option>
-              <option value="Pale Ale">I don't mind a touch of bitterness for balance, but not too much.</option>
-              <option value="Lager">It better not be bitter!</option>
-            </select>
-          </div>
+			          <div id="quizQuestionSeven" class="input-field">
+			            <select>
+			              <option value="" disabled selected>How do you feel about bitterness?</option>
+			              <option value="Porter">If it's like the bitterness in coffee, I love it.</option>
+			              <option value="Gose">If it's like the bitterness in kale, I love it.</option>
+			              <option value="Pale Ale">I don't mind a touch of bitterness for balance, but not too much.</option>
+			              <option value="Lager">It better not be bitter!</option>
+			            </select>
+			          </div>
           
 			          <div id="quizQuestionSeven" class="input-field">
 			            <select>
