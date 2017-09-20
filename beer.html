@@ -5,7 +5,20 @@
 	<!--Import materialize css -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<script type="text/css" src="css/style.css"></script>
-
+  <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 400px;
+        width: 400px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
 </head>
 <body>
 	<!-- Modal -->
@@ -281,19 +294,21 @@
 				</div>
 
 				<!--Map-->
-				<div class="col s8">
-					<div class="z-depth-2" id="map"></div>
+				<div class="container">
+					<div id="map"></div>
 				</div>
 			</div>
 		</div>	
 	</div>
-
-
+	
 	<!--Import jQuery-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<!--Import materialize js-->	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 	<!--Import javascript-->
 	<script type="text/javascript" src="javascript/app.js"></script>
+		<!--Google maps-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2JiaINU1ne0lx60F4HbMgKXZZbDtJraQ&callback=initMap"
+    async defer></script>
 </body>
 </html>
