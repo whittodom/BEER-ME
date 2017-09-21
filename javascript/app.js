@@ -1,5 +1,5 @@
 
-$( document ).ready(function(){
+$(document).ready(function(){
 
 	//Materialize JS
 
@@ -20,9 +20,50 @@ $( document ).ready(function(){
 
 	$('select').material_select(); //initialize multiple selection drop-down menu
 
+	function finalBeer() {
 
+		var beerCounts = {
+			lager: 0,
+			ale: 0,
+			wheat: 0,
+			stout: 0,
+			ipa: 0,
+			saison: 0,
+			kolsch: 0,
+			gose: 0,
+			pils: 0,
+			porter: 0,
+			hefeweizen: 0,
+		}
 
+		var questions = $(".question");
+		var numOfQuestions = questions.length;
 
+		console.log(numOfQuestions);
+		for (var i = 0; i < questions.length; i++) {
+			var selectValue = $(questions[i]).val();
 
+			if (selectValue) {
+				beerCounts[selectValue]++;
+			}
+		}
+
+		console.log(beerCounts);
+
+		var mostLikedBeer;
+		var highestValue = 0;
+		for (var beer in beerCounts) {
+			var currentValue = beerCounts[beer];
+
+			if (currentValue > highestValue) {
+				mostLikedBeer = beer;
+				highestValue = currentValue;
+			}
+		}
+
+		console.log(mostLikedBeer);
+	};
+
+	$("#quizSubmit").on("click", finalBeer);
 
 });
