@@ -193,14 +193,14 @@
 				<div class="col s4">
 					<ul class="tabs tabs-fixed-width">
 						<!--Tab 1-->
-						<li class="tab col s6"><a class="active" href="#style-selector">Styles</a></li>
+						<li class="tab col s6"><a href="#style-selector">Styles</a></li>
 						<!--Tab 2-->
 						<li class="tab col s6"><a href="#beerQuizSection">Beer Quiz</a></li>
 					</ul>
 				
 				<!--Style Selector-->
 				<div id="style-selector" class="input-field">
-					<select multiple>
+					<select multiple id="style-listener">
 						<option value="" disabled selected>choose from options below</option>
 						<option value="noIdea">I have no idea!</option>
 						<option value="ale">Ale</option>
@@ -222,7 +222,7 @@
 
 					</select>
 
-	<div id="beerQuizSection">
+	      <div id="beerQuizSection">
 
           <div id="quizQuestion" class="input-field">
             <select class="question">
@@ -296,12 +296,8 @@
 
         <button id="quizSubmit" class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
 
-    </div>
+      </div>
           
-
-					<!--Add line to distinguish new element-->
-					<div class="divider"></div>
-
 					<!--Search Results-->
 					<ul class="collection">
 						<li  id="results" class="collection-item">1</li>

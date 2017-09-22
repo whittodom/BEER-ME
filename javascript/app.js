@@ -1,8 +1,6 @@
 
 $(document).ready(function(){
 
-	//Materialize JS
-
   //modal
   $(".modal").modal({
     dismissible: false, // Modal can't be dismissed by clicking outside of the modal
@@ -40,12 +38,39 @@ $(document).ready(function(){
       return true;
   })
 
-
   $(".modal").modal("open"); //open modal on doc ready
 
+
+  //Materialize JS
 	$(".button-collapse").sideNav(); //initialize mobile format
 
 	$('select').material_select(); //initialize multiple selection drop-down menu
+
+  //BreweryDB
+  $("#style-listener").change(function(){
+    var beerStyle = $(this).val();
+    console.log(beerStyle);
+    // var lat = 30.2672
+    // var lng = -97.7431
+    var queryURL = "http://api.brewerydb.com/v2/locations?key=0b0c6173e7c109d3992ead7165d4dda1&locality=austin&q=stout";
+
+    //AJAX request
+    $.ajax({
+      url:queryURL,
+      method: "GET"
+    })  
+    .done(function(response){
+      var results = response.data;
+      console.log(results);
+
+    //variable to hold info -- for loop?
+
+    //store info
+
+    //append info
+    })
+  });
+
 
 	function finalBeer() {
 
@@ -104,6 +129,7 @@ function initMap() {
     center: new google.maps.LatLng(30.2672,-97.7431),
     mapTypeId: 'terrain'
   });
+
 
   // Create a <script> tag and set the USGS URL as the source.
   var script = document.createElement('script');
