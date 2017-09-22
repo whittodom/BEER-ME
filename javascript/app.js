@@ -1,5 +1,5 @@
 
-$( document ).ready(function(){
+$(document).ready(function(){
 
 
 
@@ -51,9 +51,11 @@ $( document ).ready(function(){
 
   //BreweryDB
   $("#style-listener").change(function(){
-    console.log("Listener for Style Finder");
-    var style = $(this).attr("data-name");
-    var queryURL = "http://api.brewerydb.com/v2/search?q=" + style + "&key=key=0b0c6173e7c109d3992ead7165d4dda1"
+    var beerStyle = $(this).val();
+    console.log(beerStyle);
+    // var lat = 30.2672
+    // var lng = -97.7431
+    var queryURL = "http://api.brewerydb.com/v2/locations?key=0b0c6173e7c109d3992ead7165d4dda1&locality=austin&q=stout";
 
     //AJAX request
     $.ajax({
