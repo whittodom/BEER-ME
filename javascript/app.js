@@ -3,6 +3,7 @@ $( document ).ready(function(){
 
 	//Materialize JS
 
+
   //modal
   $(".modal").modal({
     dismissible: false, // Modal can't be dismissed by clicking outside of the modal
@@ -41,41 +42,117 @@ $( document ).ready(function(){
       return true;
   })
 
-
   $(".modal").modal("open"); //open modal on doc ready
 
+
+  //Materialize JS
 	$(".button-collapse").sideNav(); //initialize mobile format
 
 	$('select').material_select(); //initialize multiple selection drop-down menu
 
+  //BreweryDB
+  $("#style-listener").change(function(){
+    var beerStyle = $(this).val();
+    console.log(beerStyle);
+    // var lat = 30.2672
+    // var lng = -97.7431
+    var queryURL = "http://api.brewerydb.com/v2/locations?key=0b0c6173e7c109d3992ead7165d4dda1&locality=austin&q=stout";
+
+    //AJAX request
+    $.ajax({
+      url:queryURL,
+      method: "GET"
+    })  
+    .done(function(response){
+      var results = response.data;
+      console.log(results);
+
+    //variable to hold info -- for loop?
+
+    //store info
+
+    //append info
+    })
+  });
+
+
+	function finalBeer() {
+
+		var beerCounts = {
+			lager: 0,
+			ale: 0,
+			wheat: 0,
+			stout: 0,
+			ipa: 0,
+			saison: 0,
+			kolsch: 0,
+			gose: 0,
+			pils: 0,
+			porter: 0,
+			hefeweizen: 0,
+		}
+
+		var questions = $(".question");
+		var numOfQuestions = questions.length;
+
+		console.log(numOfQuestions);
+		for (var i = 0; i < questions.length; i++) {
+			var selectValue = $(questions[i]).val();
+
+			if (selectValue) {
+				beerCounts[selectValue]++;
+			}
+		}
+
+		console.log(beerCounts);
+
+		var mostLikedBeer;
+		var highestValue = 0;
+		for (var beer in beerCounts) {
+			var currentValue = beerCounts[beer];
+
+			if (currentValue > highestValue) {
+				mostLikedBeer = beer;
+				highestValue = currentValue;
+			}
+		}
+
+		console.log(mostLikedBeer);
+	};
+
+	$("#quizSubmit").on("click", finalBeer);
+
 });
+
+
 //30.2672° N, 97.7431° W
-   var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 8,
-          center: new google.maps.LatLng(30.2672,-97.7431),
-          mapTypeId: 'terrain'
-        });
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: new google.maps.LatLng(30.2672,-97.7431),
+    mapTypeId: 'terrain'
+  });
 
-        // Create a <script> tag and set the USGS URL as the source.
-        var script = document.createElement('script');
-        // This example uses a local copy of the GeoJSON stored at
-        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-        script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-        document.getElementsByTagName('head')[0].appendChild(script);
-      }
 
-      // Loop through the results array and place a marker for each
-      // set of coordinates.
-      window.eqfeed_callback = function(results) {
-        for (var i = 0; i < results.features.length; i++) {
-          var coords = results.features[i].geometry.coordinates;
-          var latLng = new google.maps.LatLng(coords[1],coords[0]);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            map: map
-          });
-        }
-      }
+  // Create a <script> tag and set the USGS URL as the source.
+  var script = document.createElement('script');
+  // This example uses a local copy of the GeoJSON stored at
+  // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+  script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
+  document.getElementsByTagName('head')[0].appendChild(script);
+}
+
+// Loop through the results array and place a marker for each
+// set of coordinates.
+window.eqfeed_callback = function(results) {
+  for (var i = 0; i < results.features.length; i++) {
+    var coords = results.features[i].geometry.coordinates;
+    var latLng = new google.maps.LatLng(coords[1],coords[0]);
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+  }
+}
       //http://api.brewerydb.com/v2/?key=abcdef
