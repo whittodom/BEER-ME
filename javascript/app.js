@@ -1,5 +1,8 @@
+//google api AIzaSyA2JiaINU1ne0lx60F4HbMgKXZZbDtJraQ
+$( document ).ready(function(){
 
-$(document).ready(function(){
+	//Materialize JS
+
 
   //modal
   $(".modal").modal({
@@ -25,6 +28,7 @@ $(document).ready(function(){
     var age = 21; //age to enter
     var birthDate = new Date();
     birthDate.setFullYear(year, month-1, day);
+
 
     var currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() - age);
