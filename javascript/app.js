@@ -105,9 +105,9 @@ $( document ).ready(function(){
 	$('select').material_select(); //initialize multiple selection drop-down menu
 
   //BreweryDB
-  $("#style-listener").change(function(){
-    var beerStyle = $(this).val();
-    console.log(beerStyle);
+  $("#zipCode").change(function(){
+    var zipCode = $(this).val();
+    console.log(zipCode);
     // var lat = 30.2672
     // var lng = -97.7431
     var queryURL = "http://api.brewerydb.com/v2/locations?key=0b0c6173e7c109d3992ead7165d4dda1&locality=austin&q=";
