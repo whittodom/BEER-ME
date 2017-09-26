@@ -1,0 +1,17 @@
+body{
+	background-color: ;
+	color: ;
+
+}
+
+#map {
+	width: 400px;
+	height: 400px;
+	background-color: grey;
+}
+
+.modal-content{
+	text-align: center;
+}
+
+
