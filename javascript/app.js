@@ -1,8 +1,66 @@
 //google api AIzaSyA2JiaINU1ne0lx60F4HbMgKXZZbDtJraQ
+$.fn.parallax = function () {
+    var window_width = $(window).width();
+    // Parallax Scripts
+    return this.each(function (i) {
+      var $this = $(this);
+      $this.addClass('parallax');
+
+      function updateParallax(initial) {
+        var container_height;
+        if (window_width < 601) {
+          container_height = $this.height() > 0 ? $this.height() : $this.children("img").height();
+        } else {
+          container_height = $this.height() > 0 ? $this.height() : 500;
+        }
+        var $img = $this.children("img").first();
+        var img_height = $img.height();
+        var parallax_dist = img_height - container_height;
+        var bottom = $this.offset().top + container_height;
+        var top = $this.offset().top;
+        var scrollTop = $(window).scrollTop();
+        var windowHeight = window.innerHeight;
+        var windowBottom = scrollTop + windowHeight;
+        var percentScrolled = (windowBottom - top) / (container_height + windowHeight);
+        var parallax = Math.round(parallax_dist * percentScrolled);
+
+        if (initial) {
+          $img.css('display', 'block');
+        }
+        if (bottom > scrollTop && top < scrollTop + windowHeight) {
+          $img.css('transform', "translate3D(-50%," + parallax + "px, 0)");
+        }
+      }
+
+      // Wait for image load
+      $this.children("img").one("load", function () {
+        updateParallax(true);
+      }).each(function () {
+        if (this.complete) $(this).trigger("load");
+      });
+
+      $(window).scroll(function () {
+        window_width = $(window).width();
+        updateParallax(false);
+      });
+
+      $(window).resize(function () {
+        window_width = $(window).width();
+        updateParallax(false);
+      });
+    });
+  };
+
 $( document ).ready(function(){
 
+	//Materialize JS
+
+  $(".parallax").parallax();
+
+// $("#beerQuizSection").hide();
+
   //modal
-  $(".modal").modal({
+  $("#modal1").modal({
     dismissible: false, // Modal can't be dismissed by clicking outside of the modal
     opacity: .5, // Opacity of modal background
     inDuration: 300, // Transition in duration
@@ -34,18 +92,42 @@ $( document ).ready(function(){
       //do NOT close modal
       console.log("Nope!");
       return false;
-    }
-    console.log("Come on in!");
-    return true;
-  })
-  $(".modal").modal("open"); //open modal on doc ready
+    };
+      console.log("Come on in!");
+      return true;
+  });
 
+  $("#modal1").modal("open"); //open modal on doc ready
 
   //Materialize JS
 	$(".button-collapse").sideNav(); //initialize mobile format
 
 	$('select').material_select(); //initialize multiple selection drop-down menu
 
+  //BreweryDB
+  $("#zipCode").change(function(){
+    var zipCode = $(this).val();
+    console.log(zipCode);
+    // var lat = 30.2672
+    // var lng = -97.7431
+
+    //This function will run after user inputs beer quiz answers and clicks Submit
+
+function finalBeer() {
+
+  		var beerCounts = {
+  			Lager: 0,
+  			Ale: 0,
+  			Wheat: 0,
+  			Stout: 0,
+  			IPA: 0,
+  			Saison: 0,
+  			Kolsch: 0,
+  			Gose: 0,
+  			Pils: 0,
+  			Porter: 0,
+  			Hefeweizen: 0,
+  		};
 
   //Zomato
   $.ajax({
@@ -70,23 +152,6 @@ $( document ).ready(function(){
     }
   });
 
-  //Beer Quiz
-  function finalBeer() {
-
-    var beerCounts = {
-      lager: 0,
-      ale: 0,
-      wheat: 0,
-      stout: 0,
-      ipa: 0,
-      saison: 0,
-      kolsch: 0,
-      gose: 0,
-      pils: 0,
-      porter: 0,
-      hefeweizen: 0,
-    };
-
     var questions = $(".question");
     var numOfQuestions = questions.length;
 
@@ -102,17 +167,29 @@ $( document ).ready(function(){
 
     console.log(beerCounts);
 
-    var mostLikedBeer;
-    var highestValue = 0;
+			if (currentValue > highestValue) {
+				mostLikedBeer = beer;
+				highestValue = currentValue;
+			};
+		};
 
-    for (var beer in beerCounts) {
-      var currentValue = beerCounts[beer];
+		console.log(mostLikedBeer);
 
-      if (currentValue > highestValue) {
-        mostLikedBeer = beer;
-        highestValue = currentValue;
-      };
-    };
+    $("#beerStyle").text(mostLikedBeer);
+};
+
+    $("#quizSubmit").on("click", finalBeer);
+
+		$("#modal2").modal({
+	
+    		dismissible: true, // Modal can't be dismissed by clicking outside of the modal
+    		opacity: .5, // Opacity of modal background
+    		inDuration: 300, // Transition in duration
+    		outDuration: 200, // Transition out duration
+    		startingTop: '4%', // Starting top style attribute
+    		endingTop: '10%', // Ending top style attribute
+
+    });
 
     console.log(mostLikedBeer);
   };
@@ -120,7 +197,6 @@ $( document ).ready(function(){
   $("#quizSubmit").on("click", finalBeer);
 
 }); //end of doc ready wrapper
-
 
   //30.2672° N, 97.7431° W
   var map;
