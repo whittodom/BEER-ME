@@ -66,7 +66,7 @@ $( document ).ready(function(){
     },
     processData: true, //data is an object => tells jQuery to construct URL params from it
     success: function(data) {
-    console.log(data); //what to do with response data on success
+      console.log(data); //what to do with response data on success
     }
   });
 
