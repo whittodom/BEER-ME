@@ -52,7 +52,7 @@ $(document).ready(function(){
     type: "GET",
     headers: {
     'X-Zomato-API-Key': '3188326edb571cb21760fac9ee7377f0' //use-key
-  },
+    },
   url: 'https://developers.zomato.com/api/v2.1/search', //basic URL
   dataType: 'json', //wanted response data type
   data: {
