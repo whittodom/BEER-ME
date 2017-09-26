@@ -46,31 +46,30 @@ $(document).ready(function(){
 
 	$('select').material_select(); //initialize multiple selection drop-down menu
 
-  //BreweryDB
-  $("#style-listener").change(function(){
-    var beerStyle = $(this).val();
-    console.log(beerStyle);
-    // var lat = 30.2672
-    // var lng = -97.7431
-    var queryURL = "http://api.brewerydb.com/v2/locations?key=0b0c6173e7c109d3992ead7165d4dda1&locality=austin&q=stout";
 
-    //AJAX request
-    $.ajax({
-      url:queryURL,
-      method: "GET"
-    })  
-    .done(function(response){
-      var results = response.data;
-      console.log(results);
-
-    //variable to hold info -- for loop?
-
-    //store info
-
-    //append info
-    })
-  });
-
+  //Zomato
+$.ajax({
+  type: "GET", //it's a GET request API
+  headers: {
+    'X-Zomato-API-Key': '3188326edb571cb21760fac9ee7377f0' //only allowed non-standard header
+  },
+  url: 'https://developers.zomato.com/api/v2.1/search', //what do you want
+  dataType: 'json', //wanted response data type - let jQuery handle the rest...
+  data: {
+     //could be directly in URL, but this is more pretty, clear and easier to edit
+     entity_id: '278',
+     entity_type: 'city',
+     count: '10',
+     establishment_type: '283',
+     category: 'Brewery',
+     sort: 'rating',
+     order: 'desc'
+  },
+  processData: true, //data is an object => tells jQuery to construct URL params from it
+  success: function(data) {
+    console.log(data); //what to do with response data on success
+  }
+});
 
 	function finalBeer() {
 
@@ -151,4 +150,3 @@ window.eqfeed_callback = function(results) {
     });
   }
 }
-      //http://api.brewerydb.com/v2/?key=abcdef
