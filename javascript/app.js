@@ -110,24 +110,6 @@ $( document ).ready(function(){
     console.log(zipCode);
     // var lat = 30.2672
     // var lng = -97.7431
-    var queryURL = "http://api.brewerydb.com/v2/locations?key=0b0c6173e7c109d3992ead7165d4dda1&locality=austin&q=";
-
-    //AJAX request
-    $.ajax({
-      url:queryURL,
-      method: "GET"
-    })  
-    .done(function(response){
-      var results = response.data;
-      console.log(results);
-
-    //variable to hold info -- for loop?
-
-    //store info
-
-    //append info
-    });
-  });
 
     //This function will run after user inputs beer quiz answers and clicks Submit
 
@@ -147,24 +129,43 @@ function finalBeer() {
   			Hefeweizen: 0,
   		};
 
-		var questions = $(".question");
-		var numOfQuestions = questions.length;
+  //Zomato
+  $.ajax({
+    type: "GET",
+    headers: {
+    'X-Zomato-API-Key': '3188326edb571cb21760fac9ee7377f0' //use-key
+    },
+    url: 'https://developers.zomato.com/api/v2.1/search', //basic URL
+    dataType: 'json', //wanted response data type
+    data: { //search parameters
+      entity_id: '278',
+      entity_type: 'city',
+      count: '15',
+      establishment_type: '283',
+      category: 'Brewery',
+      sort: 'rating',
+      order: 'desc'
+    },
+    processData: true, //data is an object => tells jQuery to construct URL params from it
+    success: function(data) {
+      console.log(data); //what to do with response data on success
+    }
+  });
 
-		console.log(numOfQuestions);
-		for (var i = 0; i < questions.length; i++) {
-			var selectValue = $(questions[i]).val();
+    var questions = $(".question");
+    var numOfQuestions = questions.length;
 
-			if (selectValue) {
-				beerCounts[selectValue]++;
-			};
-		};
+    console.log(numOfQuestions);
 
-		console.log(beerCounts);
+    for (var i = 0; i < questions.length; i++) {
+      var selectValue = $(questions[i]).val();
 
-		var mostLikedBeer;
-		var highestValue = 0;
-		for (var beer in beerCounts) {
-			var currentValue = beerCounts[beer];
+      if (selectValue) {
+      beerCounts[selectValue]++;
+      };
+    };
+
+    console.log(beerCounts);
 
 			if (currentValue > highestValue) {
 				mostLikedBeer = beer;
@@ -190,37 +191,40 @@ function finalBeer() {
 
     });
 
-});
+    console.log(mostLikedBeer);
+  };
 
+  $("#quizSubmit").on("click", finalBeer);
 
-//30.2672° N, 97.7431° W
-var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: new google.maps.LatLng(30.2672,-97.7431),
-    mapTypeId: 'terrain'
-  });
+}); //end of doc ready wrapper
 
-
-  // Create a <script> tag and set the USGS URL as the source.
-  var script = document.createElement('script');
-  // This example uses a local copy of the GeoJSON stored at
-  // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-  script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-  document.getElementsByTagName('head')[0].appendChild(script);
-}
-
-// Loop through the results array and place a marker for each
-// set of coordinates.
-window.eqfeed_callback = function(results) {
-  for (var i = 0; i < results.features.length; i++) {
-    var coords = results.features[i].geometry.coordinates;
-    var latLng = new google.maps.LatLng(coords[1],coords[0]);
-    var marker = new google.maps.Marker({
-      position: latLng,
-      map: map
+  //30.2672° N, 97.7431° W
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 8,
+      center: new google.maps.LatLng(30.2672,-97.7431),
+      mapTypeId: 'terrain'
     });
+
+
+    // Create a <script> tag and set the USGS URL as the source.
+    var script = document.createElement('script');
+    // This example uses a local copy of the GeoJSON stored at
+    // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+    script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
+    document.getElementsByTagName('head')[0].appendChild(script);
+  };
+
+  // Loop through the results array and place a marker for each
+  // set of coordinates.
+  window.eqfeed_callback = function(results) {
+    for (var i = 0; i < results.features.length; i++) {
+      var coords = results.features[i].geometry.coordinates;
+      var latLng = new google.maps.LatLng(coords[1],coords[0]);
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+      });
+    };
   }
-}
-      //http://api.brewerydb.com/v2/?key=abcdef
