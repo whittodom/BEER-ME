@@ -1,4 +1,9 @@
+//google api AIzaSyA2JiaINU1ne0lx60F4HbMgKXZZbDtJraQ
 $( document ).ready(function(){
+
+  //Materialize JS
+
+  modal
   $(".modal").modal({
     dismissible: false, // Modal can't be dismissed by clicking outside of the modal
     opacity: .5, // Opacity of modal background
@@ -23,6 +28,7 @@ $( document ).ready(function(){
     var birthDate = new Date();
     birthDate.setFullYear(year, month-1, day);
 
+
     var currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() - age);
     if ((currentDate - birthDate) < 0){
@@ -36,12 +42,10 @@ $( document ).ready(function(){
   })
 
 
-  //$(".modal").modal("open"); //open modal on doc ready
+  $(".modal").modal("open"); //open modal on doc ready
 
-	$(".button-collapse").sideNav(); //initialize mobile format
+  $(".button-collapse").sideNav(); //initialize mobile format
 
-	$('select').material_select(); //initialize multiple selection drop-down menu
+  $('select').material_select(); //initialize multiple selection drop-down menu
 
 });
-
-   
