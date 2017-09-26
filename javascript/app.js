@@ -34,8 +34,8 @@ $(document).ready(function(){
       console.log("Nope!");
       return false;
     }
-      console.log("Come on in!");
-      return true;
+    console.log("Come on in!");
+    return true;
   })
 
   $(".modal").modal("open"); //open modal on doc ready
@@ -48,74 +48,74 @@ $(document).ready(function(){
 
 
   //Zomato
-$.ajax({
-  type: "GET", //it's a GET request API
-  headers: {
-    'X-Zomato-API-Key': '3188326edb571cb21760fac9ee7377f0' //only allowed non-standard header
+  $.ajax({
+    type: "GET",
+    headers: {
+    'X-Zomato-API-Key': '3188326edb571cb21760fac9ee7377f0' //use-key
   },
-  url: 'https://developers.zomato.com/api/v2.1/search', //what do you want
-  dataType: 'json', //wanted response data type - let jQuery handle the rest...
+  url: 'https://developers.zomato.com/api/v2.1/search', //basic URL
+  dataType: 'json', //wanted response data type
   data: {
-     //could be directly in URL, but this is more pretty, clear and easier to edit
+     //search parameters
      entity_id: '278',
      entity_type: 'city',
-     count: '10',
+     count: '15',
      establishment_type: '283',
      category: 'Brewery',
      sort: 'rating',
      order: 'desc'
-  },
+   },
   processData: true, //data is an object => tells jQuery to construct URL params from it
   success: function(data) {
     console.log(data); //what to do with response data on success
   }
 });
 
-	function finalBeer() {
+  function finalBeer() {
 
-		var beerCounts = {
-			lager: 0,
-			ale: 0,
-			wheat: 0,
-			stout: 0,
-			ipa: 0,
-			saison: 0,
-			kolsch: 0,
-			gose: 0,
-			pils: 0,
-			porter: 0,
-			hefeweizen: 0,
-		}
+    var beerCounts = {
+     lager: 0,
+     ale: 0,
+     wheat: 0,
+     stout: 0,
+     ipa: 0,
+     saison: 0,
+     kolsch: 0,
+     gose: 0,
+     pils: 0,
+     porter: 0,
+     hefeweizen: 0,
+   }
 
-		var questions = $(".question");
-		var numOfQuestions = questions.length;
+   var questions = $(".question");
+   var numOfQuestions = questions.length;
 
-		console.log(numOfQuestions);
-		for (var i = 0; i < questions.length; i++) {
-			var selectValue = $(questions[i]).val();
+   console.log(numOfQuestions);
+   for (var i = 0; i < questions.length; i++) {
+     var selectValue = $(questions[i]).val();
 
-			if (selectValue) {
-				beerCounts[selectValue]++;
-			}
-		}
+     if (selectValue) {
+      beerCounts[selectValue]++;
+    }
+  }
 
-		console.log(beerCounts);
+  console.log(beerCounts);
 
-		var mostLikedBeer;
-		var highestValue = 0;
-		for (var beer in beerCounts) {
-			var currentValue = beerCounts[beer];
+  var mostLikedBeer;
+  var highestValue = 0;
+  for (var beer in beerCounts) {
+   var currentValue = beerCounts[beer];
 
-			if (currentValue > highestValue) {
-				mostLikedBeer = beer;
-				highestValue = currentValue;
-			}
-		}
+   if (currentValue > highestValue) {
+    mostLikedBeer = beer;
+    highestValue = currentValue;
+  }
+}
 
-		console.log(mostLikedBeer);
-	};
+console.log(mostLikedBeer);
+};
 
-	$("#quizSubmit").on("click", finalBeer);
+$("#quizSubmit").on("click", finalBeer);
 
 });
 
