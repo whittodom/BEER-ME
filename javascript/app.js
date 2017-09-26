@@ -38,8 +38,8 @@ $( document ).ready(function(){
       console.log("Nope!");
       return false;
     }
-      console.log("Come on in!");
-      return true;
+    console.log("Come on in!");
+    return true;
   })
 
   $(".modal").modal("open"); //open modal on doc ready
@@ -50,77 +50,76 @@ $( document ).ready(function(){
 
 	$('select').material_select(); //initialize multiple selection drop-down menu
 
-  //BreweryDB
-  $("#style-listener").change(function(){
-    var beerStyle = $(this).val();
-    console.log(beerStyle);
-    // var lat = 30.2672
-    // var lng = -97.7431
-    var queryURL = "http://api.brewerydb.com/v2/locations?key=0b0c6173e7c109d3992ead7165d4dda1&locality=austin&q=stout";
 
-    //AJAX request
-    $.ajax({
-      url:queryURL,
-      method: "GET"
-    })  
-    .done(function(response){
-      var results = response.data;
-      console.log(results);
+  //Zomato
+  $.ajax({
+    type: "GET",
+    headers: {
+    'X-Zomato-API-Key': '3188326edb571cb21760fac9ee7377f0' //use-key
+  },
+  url: 'https://developers.zomato.com/api/v2.1/search', //basic URL
+  dataType: 'json', //wanted response data type
+  data: {
+     //search parameters
+     entity_id: '278',
+     entity_type: 'city',
+     count: '15',
+     establishment_type: '283',
+     category: 'Brewery',
+     sort: 'rating',
+     order: 'desc'
+   },
+  processData: true, //data is an object => tells jQuery to construct URL params from it
+  success: function(data) {
+    console.log(data); //what to do with response data on success
+  }
+});
 
-    //variable to hold info -- for loop?
+  function finalBeer() {
 
-    //store info
+    var beerCounts = {
+     lager: 0,
+     ale: 0,
+     wheat: 0,
+     stout: 0,
+     ipa: 0,
+     saison: 0,
+     kolsch: 0,
+     gose: 0,
+     pils: 0,
+     porter: 0,
+     hefeweizen: 0,
+   }
 
-    //append info
-    })
-  });
+   var questions = $(".question");
+   var numOfQuestions = questions.length;
 
+   console.log(numOfQuestions);
+   for (var i = 0; i < questions.length; i++) {
+     var selectValue = $(questions[i]).val();
 
-	function finalBeer() {
+     if (selectValue) {
+      beerCounts[selectValue]++;
+    }
+  }
 
-		var beerCounts = {
-			lager: 0,
-			ale: 0,
-			wheat: 0,
-			stout: 0,
-			ipa: 0,
-			saison: 0,
-			kolsch: 0,
-			gose: 0,
-			pils: 0,
-			porter: 0,
-			hefeweizen: 0,
-		}
+  console.log(beerCounts);
 
-		var questions = $(".question");
-		var numOfQuestions = questions.length;
+  var mostLikedBeer;
+  var highestValue = 0;
+  for (var beer in beerCounts) {
+   var currentValue = beerCounts[beer];
 
-		console.log(numOfQuestions);
-		for (var i = 0; i < questions.length; i++) {
-			var selectValue = $(questions[i]).val();
+   if (currentValue > highestValue) {
+    mostLikedBeer = beer;
+    highestValue = currentValue;
+  }
+}
 
-			if (selectValue) {
-				beerCounts[selectValue]++;
-			}
-		}
+console.log(mostLikedBeer);
+};
 
-		console.log(beerCounts);
-
-		var mostLikedBeer;
-		var highestValue = 0;
-		for (var beer in beerCounts) {
-			var currentValue = beerCounts[beer];
-
-			if (currentValue > highestValue) {
-				mostLikedBeer = beer;
-				highestValue = currentValue;
-			}
-		}
-
-		console.log(mostLikedBeer);
-	};
-
-	$("#quizSubmit").on("click", finalBeer);
+$("#quizSubmit").on("click", finalBeer);
 
 });
 
@@ -155,4 +154,3 @@ window.eqfeed_callback = function(results) {
     });
   }
 }
-      //http://api.brewerydb.com/v2/?key=abcdef
