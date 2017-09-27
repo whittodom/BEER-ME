@@ -49,15 +49,13 @@ $.fn.parallax = function () {
         updateParallax(false);
       });
     });
-  };
+};
 
 $( document ).ready(function(){
 
 	//Materialize JS
 
   $(".parallax").parallax();
-
-// $("#beerQuizSection").hide();
 
   //modal
   $("#modal1").modal({
@@ -104,16 +102,15 @@ $( document ).ready(function(){
 
 	$('select').material_select(); //initialize multiple selection drop-down menu
 
-  //BreweryDB
+  //locationInput
   $("#zipCode").change(function(){
     var zipCode = $(this).val();
     console.log(zipCode);
-    // var lat = 30.2672
-    // var lng = -97.7431
+    });
 
     //This function will run after user inputs beer quiz answers and clicks Submit
 
-function finalBeer() {
+function finalBeer () {
 
   		var beerCounts = {
   			Lager: 0,
@@ -129,7 +126,53 @@ function finalBeer() {
   			Hefeweizen: 0,
   		};
 
-  //Zomato
+    var questions = $(".question");
+    var numOfQuestions = questions.length;
+
+    for (var i = 0; i < questions.length; i++) {
+      var selectValue = $(questions[i]).val();
+
+      if (selectValue) {
+      beerCounts[selectValue]++;
+      };
+    };
+
+    var mostLikedBeer;
+
+    var highestValue = 0;
+
+    for (var beer in beerCounts) {
+    var currentValue = beerCounts[beer]
+
+			if (currentValue > highestValue) {
+				mostLikedBeer = beer;
+				highestValue = currentValue;
+			};
+
+    };
+
+		console.log(mostLikedBeer);
+
+    $("#beerStyle").text(mostLikedBeer);
+
+  };
+
+    $("#quizSubmit").on("click", finalBeer);
+
+		$("#modal2").modal({
+	
+    		dismissible: true, // Modal can't be dismissed by clicking outside of the modal
+    		opacity: .5, // Opacity of modal background
+    		inDuration: 300, // Transition in duration
+    		outDuration: 200, // Transition out duration
+    		startingTop: '4%', // Starting top style attribute
+    		endingTop: '10%', // Ending top style attribute
+
+    });
+
+  $("#quizSubmit").on("click", finalBeer);
+
+//Zomato
   $.ajax({
     type: "GET",
     headers: {
@@ -150,53 +193,10 @@ function finalBeer() {
     success: function(data) {
       console.log(data); //what to do with response data on success
     }
-  });
 
-    var questions = $(".question");
-    var numOfQuestions = questions.length;
+}); 
 
-    console.log(numOfQuestions);
-
-    for (var i = 0; i < questions.length; i++) {
-      var selectValue = $(questions[i]).val();
-
-      if (selectValue) {
-      beerCounts[selectValue]++;
-      };
-    };
-
-    console.log(beerCounts);
-
-			if (currentValue > highestValue) {
-				mostLikedBeer = beer;
-				highestValue = currentValue;
-			};
-		};
-
-		console.log(mostLikedBeer);
-
-    $("#beerStyle").text(mostLikedBeer);
-};
-
-    $("#quizSubmit").on("click", finalBeer);
-
-		$("#modal2").modal({
-	
-    		dismissible: true, // Modal can't be dismissed by clicking outside of the modal
-    		opacity: .5, // Opacity of modal background
-    		inDuration: 300, // Transition in duration
-    		outDuration: 200, // Transition out duration
-    		startingTop: '4%', // Starting top style attribute
-    		endingTop: '10%', // Ending top style attribute
-
-    });
-
-    console.log(mostLikedBeer);
-  };
-
-  $("#quizSubmit").on("click", finalBeer);
-
-}); //end of doc ready wrapper
+});//end of doc ready wrapper
 
   //30.2672° N, 97.7431° W
   var map;
@@ -227,4 +227,4 @@ function finalBeer() {
         map: map
       });
     };
-  }
+  };
