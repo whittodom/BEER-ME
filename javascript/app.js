@@ -54,8 +54,10 @@ $.fn.parallax = function () {
 $( document ).ready(function(){
 
 	//Materialize JS
-
-  $(".parallax").parallax();
+  $(".parallax").parallax(); //initialize parallax
+  $(".button-collapse").sideNav(); //initialize mobile format
+  $('select').material_select(); //initialize drop-down menu
+  $('.carousel').carousel(); //initialize carousel
 
   //modal
   $("#modal1").modal({
@@ -79,16 +81,31 @@ $( document ).ready(function(){
     console.log(year);
 
     var age = 21; //age to enter
+
     var birthDate = new Date();
     birthDate.setFullYear(year, month-1, day);
 
-
     var currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() - age);
+
+    //prevent user from only entering in year of birth
+    if (month === "null" ){
+      console.log("Enter your birth month");
+      return false;
+    };
+    if (day === "null"){
+      console.log("Enter your birth day");
+      return false;        
+    };
+
+    if (year === "null"){
+      console.log("Enter your birth year");
+      return false; 
+    };
+       
     if ((currentDate - birthDate) < 0){
-      //Add paragraph that says they're not old enough to enter site
       //do NOT close modal
-      console.log("Nope!");
+      console.log("No beer for you!");
       return false;
     };
       console.log("Come on in!");
@@ -97,10 +114,6 @@ $( document ).ready(function(){
 
   $("#modal1").modal("open"); //open modal on doc ready
 
-  //Materialize JS
-	$(".button-collapse").sideNav(); //initialize mobile format
-
-	$('select').material_select(); //initialize multiple selection drop-down menu
 
   //locationInput
   $("#zipCode").change(function(){
@@ -109,22 +122,21 @@ $( document ).ready(function(){
     });
 
     //This function will run after user inputs beer quiz answers and clicks Submit
+  function finalBeer () {
 
-function finalBeer () {
-
-  		var beerCounts = {
-  			Lager: 0,
-  			Ale: 0,
-  			Wheat: 0,
-  			Stout: 0,
-  			IPA: 0,
-  			Saison: 0,
-  			Kolsch: 0,
-  			Gose: 0,
-  			Pils: 0,
-  			Porter: 0,
-  			Hefeweizen: 0,
-  		};
+		var beerCounts = {
+			Lager: 0,
+			Ale: 0,
+			Wheat: 0,
+			Stout: 0,
+			IPA: 0,
+			Saison: 0,
+			Kolsch: 0,
+			Gose: 0,
+			Pils: 0,
+			Porter: 0,
+			Hefeweizen: 0,
+		};
 
     var questions = $(".question");
     var numOfQuestions = questions.length;
@@ -176,7 +188,7 @@ function finalBeer () {
   $.ajax({
     type: "GET",
     headers: {
-    'X-Zomato-API-Key': '3188326edb571cb21760fac9ee7377f0' //use-key
+    'X-Zomato-API-Key': '3188326edb571cb21760fac9ee7377f0' //user-key
     },
     url: 'https://developers.zomato.com/api/v2.1/search', //basic URL
     dataType: 'json', //wanted response data type
@@ -191,10 +203,23 @@ function finalBeer () {
     },
     processData: true, //data is an object => tells jQuery to construct URL params from it
     success: function(data) {
-      console.log(data); //what to do with response data on success
+      var results = data;
+      console.log(results); //what to do with response data on success
+      console.log(results.restaurants[0].restaurant.photos_url);      
+      for (var d = 0; d < results.length; d++){
+        var carouselItem = $("<a>" + "<img>" + "</a>")
+          .attr("src", results.restaurants[d].restaurant.photos_url)
+          .attr("href", results.length[d])
+          .addClass("carousel-item");
+
+        console.log(carouselItem)
+      };
+
+      //append to div
+      $(".carousel").append(carouselItem);
     }
 
-}); 
+  }); 
 
 });//end of doc ready wrapper
 
