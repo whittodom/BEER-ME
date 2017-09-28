@@ -79,7 +79,6 @@ function initialize() {
     });
    
     //CURRENT WORK AREA
-   title = place.name,
    infowindow = new google.maps.InfoWindow();
    let athingy = places1[i].name;
 

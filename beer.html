@@ -7,9 +7,11 @@
 	<script type="text/css" src="css/style.css"></script>
 	
 
-<style type="text/css">
+	<style>
+
       /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
+     <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
       /* Optional: Makes the sample page fill the window. */
     html, body {
         height: 100%;
@@ -54,17 +56,16 @@
     	text-align:center;
         font-size:30px;
     }
-
-</style>
+  </style>
 
 </head>
 <body>
 	<!-- Modal -->
 	<div id="modal1" class="modal">
 		<div class="modal-content">
-			<h1>Show some ID please!</h1>
+			<h1>Are you old enough to enjoy a beer?</h1>
 			<p>Please enter your date of birth</p>
-			<div id="style-selector" class="input-field">
+			<div class="input-field">
 				<select id="age-select-month">
 					<option value="" disabled selected>Month</option>
 					<option value="1">January</option>
@@ -204,168 +205,153 @@
 					<option value="1917">1917</option>
 				</select>							
 			</div>
-		</div>
-		<div id="age-confirm" class="modal-footer">
-			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">ENTER</a>
+			<div id="age-confirm" class="modal-footer">
+				<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">ENTER</a>
+			</div>
 		</div>
 	</div>
 
-	<div class="container">
-		<!--Nav Bar-->
+	<!--Nav Bar-->
+	<div>
 		<nav>
 			<div class="nav-wrapper">
 				<a class="brand-logo">Beer Me</a>
 				<a data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li class="indigo-text text-darken-4 active"><a href="https://developers.google.com/maps/documentation/javascript/">Google Maps</a></li>
-					<li class="indigo-text text-darken-4 active"><a href="http://www.brewerydb.com/developers/docs">BreweryDB</a></li>
+					<li class="indigo-text text-darken-4 active"><a href="https://developers.zomato.com/documentation#/">Zomato</a></li>
 				</ul>			
 			</div>
 		</nav>
+	</div>
 
-		<div class="section">
-			<!--Input Form-->
-			<div class="row">
-				<div class="col s4">
-					<ul class="tabs tabs-fixed-width">
-						<!--Tab 1-->
-						<li class="tab col s6"><a href="#style-selector">Styles</a></li>
-						<!--Tab 2-->
-						<li class="tab col s6"><a href="#beerQuizSection">Beer Quiz</a></li>
-					</ul>
-				
-				<!--Style Selector-->
-				<div id="style-selector" class="input-field">
-					<select multiple id="style-listener">
-						<option value="" disabled selected>choose from options below</option>
-						<option value="noIdea">I have no idea!</option>
-						<option value="ale">Ale</option>
-						<option value="bock">Bock</option>
-						<option value="dunkel">Dunkel</option>
-						<option value="gose">Gose</option>
-						<option value="hefeweizen">Hefeweizen</option>
-						<option value="helles">Helles</option>
-						<option value="ipa">IPA</option>
-						<option value="kolsch">Kolsch</option>
-						<option value="lager">Lager</option>
-						<option value="pale ale">Pale Ale</option>
-						<option value="pils">Pils</option>
-						<option value="porter">Porter</option>
-						<option value="saison">Saison</option>
-						<option value="stout">Stout</option>
-						<option value="witbier">Witbier</option>
-						<option value="wheat">Wheat</option>
+	<!--Parallax-->
+	<div class="parallax-container valign-wrapper">
+		<div class="parallax"><img src="beer-background.jpg"></div>
+	</div>
 
-					</select>
+	<!--Main Content-->
+	<div class="section container">
 
-	      <div id="beerQuizSection">
+		<div class="row">
+			<div class="col s6">
+				<!--Tabs for main content-->
+				<ul class="tabs tabs-fixed-width">
+					<!--Tab 1-->
+					<li class="tab col s6"><a class="active" href="#location-selector">Location</a></li>
+					<!--Tab 2-->
+					<li class="tab col s6"><a href="#beerQuizSection">Finder</a></li>
+				</ul>			
 
-          <div id="quizQuestion" class="input-field">
-            <select class="question">
-              <option value="" disabled selected>How do you like your beer to look?</option>
-              <option value="lager">A snowy drift of head on a golden body. Basically, like a beer.</option>
-              <option value="ale">A huge head and a rustic haze.</option>
-              <option value="wheat">A touch of color.</option>
-              <option value="stout">Black, like a midnight sky.</option>
-            </select>
-          </div>
-
-          <div id="quizQuestion" class="input-field">
-            <select class="question">
-              <option value="" disabled selected>Are you a fan of strong or subtle flavors in your beer?</option>
-              <option value="ipa">Is Everclear a possible beer flavor?</option>
-              <option value="saison">I like interesting, vivid flavors, but maybe not strong ones.</option>
-              <option value="kolsch">I enjoy balance and subtle flavors; my palate is just that good.</option>
-              <option value="lager">Give me ALL the flavors!</option>
-            </select>
-          </div>
-
-          <div id="quizQuestion" class="input-field">
-            <select class="question">
-              <option value="" disabled selected>How do you feel about sour flavors?</option>
-              <option value="gose">Love 'em.</option>
-              <option value="lager">No strong take either way.</option>
-              <option value="wheat">Hate 'em.</option>
-            </select>
-          </div>
-
-          <div id="quizQuestion" class="input-field">
-            <select class="question">
-              <option value="" disabled selected>Do you prefer a heavy or light body?</option>
-              <option value="stout">Heavy.</option>
-              <option value="pils">Medium.</option>
-              <option value="lager">Light.</option>
-            </select>
-          </div>
-
-          <div id="quizQuestion" class="input-field">
-            <select class="question">
-              <option value="" disabled selected>What of these flavors most coincides with your preferences?</option>
-              <option value="saison">Sweet and rounded.</option>
-              <option value="kolsch">Light and flavorful.</option>
-              <option value="porter">Roasty and rich.</option>
-              <option value="saison">Citrusy, piney, and tropical.</option>
-              <option value="ipa">Boozy and bold.</option>
-            </select>
-          </div>
-
-          <div id="quizQuestion" class="input-field">
-            <select class="question">
-              <option value="" disabled selected>What kinds of aromas do you like?</option>
-              <option value="saison">Tropical fruit, citrus, or pine.</option>
-              <option value="lager">Nothing too strong; just a nice, beery aroma.</option>
-              <option value="hefeweizen">Fruit and spice: coriander, peaches, clove, banana, etc.</option>
-              <option value="porter">Chocolate, hazelnut, or coffee.</option>
-              <option value="ipa">Everclear in beer form!</option>
-            </select>
-          </div>
-
-          <div id="quizQuestion" class="input-field">
-            <select class="question">
-              <option value="" disabled selected>How do you feel about bitterness?</option>
-              <option value="porter">If it's like the bitterness in coffee, I love it.</option>
-              <option value="gose">If it's like the bitterness in kale, I love it.</option>
-              <option value="pale ale">I don't mind a touch of bitterness for balance, but not too much.</option>
-              <option value="lager">It better not be bitter!</option>
-            </select>
-          </div>
-
-        <button id="quizSubmit" class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
-		
-      </div>
-          
-					<!--Search Results-->
-					<ul class="collection">
-						<li  id="results" class="collection-item">1</li>
-						<li class="collection-item">...</li>
-						<li class="collection-item">...</li>
-						<li class="collection-item">...</li>
-					</ul>
+				<div class="col s12 mainColumn">
+					<!--Location Selector / Tab 1-->
+					<div id="location-selector" class="input-field">
+						<select id="zipCode">
+							<option value="" disabled selected>Select your location</option>
+							<option value="78759" id="northAustin">North Austin</option>
+							<option value="78744" id="southAustin">South Austin</option>
+							<option value="78724" id="eastAustin">East Austin</option>
+							<option value="78733" id="westAustin">West Austin</option>
+							<option value="78701" id="downtownAustin">Downtown Austin</option>
+						</select>
+					</div>
 				</div>
-<!--	basic embed map from google.. no use now			 -->
-<!--<iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d176397.71242606902!2d-97.862682055944!3d30.27979315770126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sbreweries+in+austin!5e0!3m2!1sen!2sus!4v1506364787787" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> -->
-				<!--Map-->
-				<div class="container">
-					<div id="map"></div>
+
+				<!--Location Selector / Tab 2-->
+				<div id="beerQuizSection" class="col s12 mainColumn">
+
+					<h3 id="beerQuizHeader">Take a Quiz to Find Out Your Favorite Style of Beer!</h3>
+
+					<div id="quizQuestion" class="input-field">
+						<select class="question">
+							<option value="" disabled selected>How do you like your beer to look?</option>
+							<option value="Lager">A snowy drift of head on a golden body. Basically, like a beer.</option>
+							<option value="Ale">A huge head and a rustic haze.</option>
+							<option value="Wheat">A touch of color.</option>
+							<option value="Stout">Black, like a midnight sky.</option>
+						</select>
+					</div>
+
+					<div id="quizQuestion" class="input-field">
+						<select class="question">
+							<option value="" disabled selected>Are you a fan of strong or subtle flavors in your beer?</option>
+							<option value="IPA">Is Everclear a possible beer flavor?</option>
+							<option value="Saison">I like interesting, vivid flavors, but maybe not strong ones.</option>
+							<option value="Kolsch">I enjoy balance and subtle flavors; my palate is just that good.</option>
+							<option value="Lager">Give me ALL the flavors!</option>
+						</select>
+					</div>
+
+					<div id="quizQuestion" class="input-field">
+						<select class="question">
+							<option value="" disabled selected>How do you feel about sour flavors?</option>
+							<option value="Gose">Love 'em.</option>
+							<option value="Lager">No strong take either way.</option>
+							<option value="Wheat">Hate 'em.</option>
+						</select>
+					</div>
+
+					<div id="quizQuestion" class="input-field">
+						<select class="question">
+							<option value="" disabled selected>Do you prefer a heavy or light body?</option>
+							<option value="Stout">Heavy.</option>
+							<option value="Pils">Medium.</option>
+							<option value="Lager">Light.</option>
+						</select>
+					</div>
+
+					<div id="quizQuestion" class="input-field">
+						<select class="question">
+							<option value="" disabled selected>What of these flavors most coincides with your preferences?</option>
+							<option value="Saison">Sweet and rounded.</option>
+							<option value="Kolsch">Light and flavorful.</option>
+							<option value="Porter">Roasty and rich.</option>
+							<option value="Saison">Citrusy, piney, and tropical.</option>
+							<option value="IPA">Boozy and bold.</option>
+						</select>
+					</div>
+
+					<div id="quizQuestion" class="input-field">
+						<select class="question">
+							<option value="" disabled selected>What kinds of aromas do you like?</option>
+							<option value="Saison">Tropical fruit, citrus, or pine.</option>
+							<option value="Lager">Nothing too strong; just a nice, beery aroma.</option>
+							<option value="Hefeweizen">Fruit and spice: coriander, peaches, clove, banana, etc.</option>
+							<option value="Porter">Chocolate, hazelnut, or coffee.</option>
+							<option value="IPA">Everclear in beer form!</option>
+						</select>
+					</div>
+
+					<div id="quizQuestion" class="input-field">
+						<select class="question">
+							<option value="" disabled selected>How do you feel about bitterness?</option>
+							<option value="Porter">If it's like the bitterness in coffee, I love it.</option>
+							<option value="Gose">If it's like the bitterness in kale, I love it.</option>
+							<option value="Pale Ale">I don't mind a touch of bitterness for balance, but not too much.</option>
+							<option value="Lager">It better not be bitter!</option>
+						</select>
+					</div>
+
+					<button data-target="modal2" id="quizSubmit" class="btn modal-trigger">Submit</button>
 				</div>
 			</div>
-		</div>	
-	</div>
-	
+		</div>
 
-	    <div class="custom_footer" style="margin-bottom:10px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">Google Map Search</div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
+		<div class ="row">
+			<div class="col s12">
+				<div class="carousel">
+			 		<a class="carousel-item" href="#one!"><img src="https://lorempixel.com/250/250/nature/1"></a>
+				</div>
+			</div>
+		</div>		
+
+	</div>
+	<div class="container">
         <div class="row">
 
         <div class="col-md-4 start_route">
 
-            <div class="trip_loop1">
+          <div class="trip_loop1">
               <p> &nbsp;</p>
               <h4></h4>
               <input class="controls form-control pac-input" type="text" placeholder="Search Box">
@@ -390,20 +376,31 @@
         </div>
     </div>
 </div>
+	<div class="parallax-container valign-wrapper">
+		<div class="parallax"><img src="beer-background.jpg"></div>
+	</div>
 
-	<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
-	<!--Import jQuery-->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<!--Import materialize js-->	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-	<!--Import javascript-->
-	<script type="text/javascript" src="javascript/app.js"></script>
-	<!--Import javascript-->
-	<script type="text/javascript" src="javascript/flipapp.js"></script>
-	<!--Google maps-->
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB46J8tlM7s9MHdF6OrWeZE3Xc_PhpvU4A&libraries=places"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+	<div id="modal2" class="modal">
+		<div class="modal-content">
+			<h1>Your Favorite Style of Beer is:
+				<p id="beerStyle"></p>
+			</h1>
+		</div>
+	</div>
+
+	<br>
+
+<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>	
+<!--Import jQuery-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!--Import materialize js-->	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<!--Import javascript-->
+<script type="text/javascript" src="javascript/app.js"></script>
+<script type="text/javascript" src="javascript/flipapp.js"></script>
+<!--Google maps-->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB46J8tlM7s9MHdF6OrWeZE3Xc_PhpvU4A&libraries=places"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 
 </body>
 </html>
