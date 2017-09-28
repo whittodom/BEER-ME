@@ -1,4 +1,3 @@
-//google api AIzaSyA2JiaINU1ne0lx60F4HbMgKXZZbDtJraQ
 $.fn.parallax = function () {
     var window_width = $(window).width();
     // Parallax Scripts
@@ -53,7 +52,7 @@ $.fn.parallax = function () {
 
 $( document ).ready(function(){
 
-	//Materialize JS
+  //Materialize JS
   $(".parallax").parallax(); //initialize parallax
   $(".button-collapse").sideNav(); //initialize mobile format
   $('select').material_select(); //initialize drop-down menu
@@ -61,6 +60,7 @@ $( document ).ready(function(){
 
   //modal
   $("#modal1").modal({
+
     dismissible: false, // Modal can't be dismissed by clicking outside of the modal
     opacity: .5, // Opacity of modal background
     inDuration: 300, // Transition in duration
@@ -84,6 +84,7 @@ $( document ).ready(function(){
 
     var birthDate = new Date();
     birthDate.setFullYear(year, month-1, day);
+
 
     var currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() - age);
@@ -114,7 +115,6 @@ $( document ).ready(function(){
 
   $("#modal1").modal("open"); //open modal on doc ready
 
-
   //locationInput
   $("#zipCode").change(function(){
     var zipCode = $(this).val();
@@ -124,19 +124,19 @@ $( document ).ready(function(){
     //This function will run after user inputs beer quiz answers and clicks Submit
   function finalBeer () {
 
-		var beerCounts = {
-			Lager: 0,
-			Ale: 0,
-			Wheat: 0,
-			Stout: 0,
-			IPA: 0,
-			Saison: 0,
-			Kolsch: 0,
-			Gose: 0,
-			Pils: 0,
-			Porter: 0,
-			Hefeweizen: 0,
-		};
+    var beerCounts = {
+      Lager: 0,
+      Ale: 0,
+      Wheat: 0,
+      Stout: 0,
+      IPA: 0,
+      Saison: 0,
+      Kolsch: 0,
+      Gose: 0,
+      Pils: 0,
+      Porter: 0,
+      Hefeweizen: 0,
+    };
 
     var questions = $(".question");
     var numOfQuestions = questions.length;
@@ -156,14 +156,14 @@ $( document ).ready(function(){
     for (var beer in beerCounts) {
     var currentValue = beerCounts[beer]
 
-			if (currentValue > highestValue) {
-				mostLikedBeer = beer;
-				highestValue = currentValue;
-			};
+      if (currentValue > highestValue) {
+        mostLikedBeer = beer;
+        highestValue = currentValue;
+      };
 
     };
 
-		console.log(mostLikedBeer);
+    console.log(mostLikedBeer);
 
     $("#beerStyle").text(mostLikedBeer);
 
@@ -171,14 +171,14 @@ $( document ).ready(function(){
 
     $("#quizSubmit").on("click", finalBeer);
 
-		$("#modal2").modal({
-	
-    		dismissible: true, // Modal can't be dismissed by clicking outside of the modal
-    		opacity: .5, // Opacity of modal background
-    		inDuration: 300, // Transition in duration
-    		outDuration: 200, // Transition out duration
-    		startingTop: '4%', // Starting top style attribute
-    		endingTop: '10%', // Ending top style attribute
+    $("#modal2").modal({
+  
+        dismissible: true, // Modal can't be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        inDuration: 300, // Transition in duration
+        outDuration: 200, // Transition out duration
+        startingTop: '4%', // Starting top style attribute
+        endingTop: '10%', // Ending top style attribute
 
     });
 
