@@ -46,7 +46,6 @@ function jaxCall() {
 });
 }
 
-
     //starting map js    
 function initialize() {
     var map = new google.maps.Map(document.getElementById("map-canvas"));
@@ -95,3 +94,4 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 //tied to the .ready(function) at the top
 });
+
