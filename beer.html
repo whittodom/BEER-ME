@@ -6,20 +6,56 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<script type="text/css" src="css/style.css"></script>
 	
+
 	<style>
 
       /* Always set the map height explicitly to define the size of the div
-      * element that contains the map. */
-      #map {
-      	height: 400px;
-      	width: 400px;
-      }
+     <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
       /* Optional: Makes the sample page fill the window. */
-      html, body {
-      	height: 100%;
-      	margin: 0;
-      	padding: 0;
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    	}
+    #map-canvas {
+        width:700px;
+        height: 600px;
+        margin: 0px;
+        padding: 10px;
+        float: left;
+        background: #FFF !important;
+        max-width:none;
       }
+    #target {
+        width: 345px;
+      }
+    .map-box{
+          background: #FFF !important;
+          padding: 25px;
+          height:600px;
+      }
+    #target {
+      width: 345px;
+    }
+    .trip_loopn{margin-top: 10px; margin-bottom:10px;}
+    .title{
+        margin-bottom:10px;
+    }
+    .title input,textarea{
+        margin-top:10px;
+    }
+    .title h4{
+        margin-top:10px;
+    }
+    .custom_footer {
+    	width:100%;
+    	display:inline-block;
+    	background:black;
+    	color:#fff;
+    	text-align:center;
+        font-size:30px;
+    }
   </style>
 
 </head>
@@ -299,13 +335,6 @@
 					<button data-target="modal2" id="quizSubmit" class="btn modal-trigger">Submit</button>
 				</div>
 			</div>
-
-			<!--Map-->
-			<div class="col s6">
-				<div class="container">
-					<div id="map"></div>
-				</div>
-			</div>	
 		</div>
 
 		<div class ="row">
@@ -317,7 +346,36 @@
 		</div>		
 
 	</div>
+	<div class="container">
+        <div class="row">
 
+        <div class="col-md-4 start_route">
+
+          <div class="trip_loop1">
+              <p> &nbsp;</p>
+              <h4></h4>
+              <input class="controls form-control pac-input" type="text" placeholder="Search Box">
+            </div>
+            <p>&nbsp;</p>
+            <div class="trip_loop2">
+              <h4>Search</h4>
+              <input class="controls form-control pac-input" type="text" placeholder="Search for Breweries">
+            </div>
+
+      </div>
+
+      <div class="col-md-8">
+          <div id="map-canvas"></div>
+      </div>
+  </div>
+</div>
+<div class="custom_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12"></div>
+        </div>
+    </div>
+</div>
 	<div class="parallax-container valign-wrapper">
 		<div class="parallax"><img src="beer-background.jpg"></div>
 	</div>
@@ -331,19 +389,18 @@
 	</div>
 
 	<br>
-	
+
+<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>	
 <!--Import jQuery-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
 <!--Import materialize js-->	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-
 <!--Import javascript-->
 <script type="text/javascript" src="javascript/app.js"></script>
-
+<script type="text/javascript" src="javascript/flipapp.js"></script>
 <!--Google maps-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2JiaINU1ne0lx60F4HbMgKXZZbDtJraQ&callback=initMap"
-async defer></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB46J8tlM7s9MHdF6OrWeZE3Xc_PhpvU4A&libraries=places"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 
 </body>
 </html>

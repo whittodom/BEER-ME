@@ -1,7 +1,4 @@
 $( document ).ready(function(){
-//https://crossorigin.me/http://api.brewerydb.com/v2/locations/?key=
-//api key" + cityState + "=" + where
-//firebase data
  var config = {
     apiKey: "AIzaSyCW-h4JrfSKwJfOaknf-FO4_xOPu60ypck",
     authDomain: "phillip-s-timesheet.firebaseapp.com",
@@ -38,77 +35,63 @@ $( document ).ready(function(){
   return false;
   });
 
-//database.ref().on("child_added", function(snapshot) {
-//var sv = snapshot.val();
-//var queryURL = sv.val().queryURL();
-///console.log(sv)
-//
-$.ajax({
-      url: queryURL,
-      method: 'GET'
-    }).done(function(response) {
-      console.log(response);
+//ajax call-not finished, may keep live so i can show the error or may grey out 
+function jaxCall() {
+  $("#map").empty();
+
+  var postalCode = "postalCode";
+  $("#zipcodeSubmit").on("click", function(){
+  
+  var queryURL = "http://api.brewerydb.com/v2/locations/?key=c756ef0b049ff96fde23bc1d0dd1abbc&" + postalCode + "=" + zipcode
+});
+}
 
 
-     var results=response.data;
-     for (var i = 0; i < results.length; i++) {
-      
-      var animalDiv = $("<div>");
+    //starting map js    
+function initialize() {
+    var map = new google.maps.Map(document.getElementById("map-canvas"));
+    var austin = new google.maps.LatLng(30.2672 , -97.7431);
+    map = new google.maps.Map(document.getElementById("map-canvas"), {
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    zoom: 11,
+    center: austin
+  });
+  // search box defined here
+  var input2 = $('.pac-input')[1];
+  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  var searchBox2 = new google.maps.places.SearchBox((input2));
+  // search function start here
+  google.maps.event.addListener(searchBox2, 'places_changed', function createMarkers() {
 
-      var lat = response.data[i].data.longitude.url;
-      var lng = response.data[i].data.latitude.url;
+  var places1 = searchBox2.getPlaces();
 
-      var p = $("<p>").text("Rating: " + results[i].longitude);
-      
-     // var animalImage = $("<p>").attr({
-       // "src": gifIMAGE,
-        //"data-still": gifIMAGE,
-        //"data-animate": gifACTION,
-        //"data-state": "still",
-        //"class": "GIFSTATE"
-     // });
-        
-    //  animalDiv.append(p);
-      //animalDiv.append(animalImage);
-      
+  if (places1.length == 0) {
+    return;
+  }
 
-     // $("#animalGifs").prepend(animalDiv);
-      
-     }
-    
+  for (var i = 0, place; place = places1[i]; i++) {
+  // Create a marker for each place.
+  var  marker = new google.maps.Marker({
+          map:map,
+          position: place.geometry.location,
+          draggable: false
+
     });
+   
+    //CURRENT WORK AREA
+   infowindow = new google.maps.InfoWindow();
+   let athingy = places1[i].name;
 
+   google.maps.event.addListener(marker, "click", function(){
+      infowindow.setContent(athingy);
+      infowindow.open(map, this);
+    })
+ 
+  };
+
+    });
+     
+};
+google.maps.event.addDomListener(window, 'load', initialize);
 //tied to the .ready(function) at the top
 });
-
- 
-
-    var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 8,
-          center: new google.maps.LatLng(30.2672,-97.7431),
-         mapTypeId: 'terrain'
-       });
-
-        // Create a <script> tag and set the USGS URL as the source.
-        var script = document.createElement('script');
-        // This example uses a local copy of the GeoJSON stored at
-        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-        // will want this to be th queryURL
-        script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-        document.getElementsByTagName('head')[0].appendChild(script);
-      }
-
-       //Loop through the results array and place a marker for each
-       //set of coordinates.
-     window.eqfeed_callback = function(results) {
-        for (var i = 0; i < results.features.length; i++) {
-          var coords = results.features[i].geometry.coordinates;
-          var latLng = new google.maps.LatLng(coords[1],coords[0]);
-          var marker = new google.maps.Marker({
-            position: latLng,
-            map: map
-          });
-        }
-      }

@@ -1,4 +1,3 @@
-//google api AIzaSyA2JiaINU1ne0lx60F4HbMgKXZZbDtJraQ
 $.fn.parallax = function () {
     var window_width = $(window).width();
     // Parallax Scripts
@@ -61,6 +60,7 @@ $( document ).ready(function(){
 
   //modal
   $("#modal1").modal({
+
     dismissible: false, // Modal can't be dismissed by clicking outside of the modal
     opacity: .5, // Opacity of modal background
     inDuration: 300, // Transition in duration
@@ -84,6 +84,7 @@ $( document ).ready(function(){
 
     var birthDate = new Date();
     birthDate.setFullYear(year, month-1, day);
+
 
     var currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() - age);
@@ -113,7 +114,6 @@ $( document ).ready(function(){
   });
 
   $("#modal1").modal("open"); //open modal on doc ready
-
 
   //locationInput
   $("#zipCode").change(function(){
@@ -253,3 +253,4 @@ $( document ).ready(function(){
       });
     };
   };
+
