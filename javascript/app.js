@@ -1,5 +1,5 @@
 $.fn.parallax = function () {
-    var window_width = $(window).width();
+  var window_width = $(window).width();
     // Parallax Scripts
     return this.each(function (i) {
       var $this = $(this);
@@ -48,7 +48,7 @@ $.fn.parallax = function () {
         updateParallax(false);
       });
     });
-};
+  };
 
 $( document ).ready(function(){
 
@@ -58,7 +58,7 @@ $( document ).ready(function(){
   $('select').material_select(); //initialize drop-down menu
   $('.carousel').carousel(); //initialize carousel
 
-  //modal
+  //modal properties
   $("#modal1").modal({
 
     dismissible: false, // Modal can't be dismissed by clicking outside of the modal
@@ -103,25 +103,38 @@ $( document ).ready(function(){
       console.log("Enter your birth year");
       return false; 
     };
-       
+
     if ((currentDate - birthDate) < 0){
       //do NOT close modal
       console.log("No beer for you!");
       return false;
     };
-      console.log("Come on in!");
-      return true;
+    console.log("Come on in!");
+    return true;
   });
 
-  $("#modal1").modal("open"); //open modal on doc ready
+  //open modal on doc ready
+  $("#modal1").modal("open"); 
 
-  //locationInput
-  $("#zipCode").change(function(){
-    var zipCode = $(this).val();
-    console.log(zipCode);
-    });
 
-    //This function will run after user inputs beer quiz answers and clicks Submit
+//scroll functions
+  $("#mars").on("click", function(){
+    function scrollTo(){
+      $("html, body").animate({scrollTop: $("#main-section").offset().top}, "slow");
+      // return false;
+    }
+    scrollTo();
+  });
+
+  $("#coda").on("click", function(){
+    function scrollTo2(){
+      $("html, body").animate({scrollTop: $("#main-section").offset().top}, "slow");
+      // return false;
+    }
+    scrollTo2();
+  });
+
+  //This function will run after user inputs beer quiz answers and clicks Submit
   function finalBeer () {
 
     var beerCounts = {
@@ -137,7 +150,6 @@ $( document ).ready(function(){
       Porter: 0,
       Hefeweizen: 0,
     };
-
     var questions = $(".question");
     var numOfQuestions = questions.length;
 
@@ -145,7 +157,7 @@ $( document ).ready(function(){
       var selectValue = $(questions[i]).val();
 
       if (selectValue) {
-      beerCounts[selectValue]++;
+        beerCounts[selectValue]++;
       };
     };
 
@@ -154,72 +166,126 @@ $( document ).ready(function(){
     var highestValue = 0;
 
     for (var beer in beerCounts) {
-    var currentValue = beerCounts[beer]
-
+      var currentValue = beerCounts[beer]
       if (currentValue > highestValue) {
         mostLikedBeer = beer;
         highestValue = currentValue;
       };
-
     };
 
     console.log(mostLikedBeer);
 
     $("#beerStyle").text(mostLikedBeer);
-
   };
 
-    $("#quizSubmit").on("click", finalBeer);
+  $("#quizSubmit").on("click", finalBeer);
 
-    $("#modal2").modal({
-  
+  $("#modal2").modal({
         dismissible: true, // Modal can't be dismissed by clicking outside of the modal
         opacity: .5, // Opacity of modal background
         inDuration: 300, // Transition in duration
         outDuration: 200, // Transition out duration
         startingTop: '4%', // Starting top style attribute
         endingTop: '10%', // Ending top style attribute
-
     });
 
   $("#quizSubmit").on("click", finalBeer);
 
-//Zomato
+  var zipCode; //make global variable
+  var lat;
+  var long;
+
+  //locationInput
+  $("#zipCode").change(function(){
+    zipCode = $(this).val();
+    console.log("zip code: " + zipCode);
+    switch (zipCode) {
+      case '78759': //North Austin
+        lat = 30.401356;
+        long = -97.7525352;
+        console.log(lat + " and " + long);
+        break;
+      case '78744': //South Austin
+        lat = 30.196311;
+        long = -97.730807;
+        console.log(lat + " and " + long);
+        break;
+      case '78724': //East Austin
+        lat = 30.2944269;
+        long = -97.6222665;
+        console.log(lat + " and " + long);
+        break;
+      case '78733': //West Austin
+        lat = 30.33151879999999;
+        long = -97.86671820000001;
+        console.log(lat + " and " + long);
+        break;
+      case '78701': //Downtonw Austin
+        lat = 30.2729209;
+        long = -97.74438630000002;
+        console.log(lat + " and " + long);
+        break;
+      default: // not sure
+        console.log('no response');
+    }
+  });
+
+  //Zomato API
   $.ajax({
     type: "GET",
-    headers: {
-    'X-Zomato-API-Key': '3188326edb571cb21760fac9ee7377f0' //user-key
-    },
+    headers: {'X-Zomato-API-Key':'3188326edb571cb21760fac9ee7377f0'},//user-key
     url: 'https://developers.zomato.com/api/v2.1/search', //basic URL
     dataType: 'json', //wanted response data type
     data: { //search parameters
-      entity_id: '278',
-      entity_type: 'city',
-      count: '15',
-      establishment_type: '283',
-      category: 'Brewery',
-      sort: 'rating',
-      order: 'desc'
+      q: "brewery",
+      count: "5",    
+      radius: 15,  
+      sort: "rating",            
+      lat: 30.2672,
+      lon: -97.7431
     },
-    processData: true, //data is an object => tells jQuery to construct URL params from it
+    processData: true,//data is an object; jQuery to construct URL params
     success: function(data) {
       var results = data;
-      console.log(results); //what to do with response data on success
-      console.log(results.restaurants[0].restaurant.photos_url);      
-      for (var d = 0; d < results.length; d++){
-        var carouselItem = $("<a>" + "<img>" + "</a>")
-          .attr("src", results.restaurants[d].restaurant.photos_url)
-          .attr("href", results.length[d])
-          .addClass("carousel-item");
+      console.log(results); 
 
-        console.log(carouselItem)
-      };
+      for (var d = 0; d < results.restaurants.length; d++){
 
-      //append to div
-      $(".carousel").append(carouselItem);
-    }
+        //store info from API
+        var zomatoName = results.restaurants[d].restaurant.name;
+        console.log(zomatoName);
 
-  }); 
+        var zomatoRating = results.restaurants[d].restaurant.user_rating.aggregate_rating;
+        console.log(zomatoRating);
+
+        var zomatoImage = results.restaurants[d].restaurant.featured_image;
+        console.log(zomatoImage);
+
+        //create elements
+        var carouselBreweryDiv = $("<div>")
+        .attr({
+          href: "",
+          class: "carousel-fixed-item center"
+        });
+
+        var carouselBreweryName = $("<h2>" + zomatoName + "</h2>")
+        .attr("id", "brewery-name");
+
+        var carouselBreweryRating = $("<p>" + zomatoRating + "</p>")
+        .attr("id", "brewery-rating");
+
+        var carouselBreweryImage = $("<img>")
+        .attr({
+          src: zomatoImage,
+          id: "brewery-image"
+        });
+
+        //append to div
+        $(".add-content").html(carouselBreweryDiv + carouselBreweryName + carouselBreweryRating + carouselBreweryImage);
+
+      } //end for loop
+    } //end success function
+  }); //end ajax
 
 });//end of doc ready wrapper
 
@@ -252,5 +318,5 @@ $( document ).ready(function(){
         map: map
       });
     };
-  };
+  }
 
