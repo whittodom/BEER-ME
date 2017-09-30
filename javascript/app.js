@@ -1,3 +1,5 @@
+var DEFAULT_IMAGE_URL = 'http://www.thewaterfrontbrewery.com/wp-content/uploads/2016/05/thebrewery.jpg';
+
 $.fn.parallax = function () {
   var window_width = $(window).width();
     // Parallax Scripts
@@ -146,6 +148,10 @@ $( document ).ready(function(){
               var zomatoImage = results.restaurants[d].restaurant.featured_image;
               console.log(zomatoImage);
 
+              if (!zomatoImage) {
+                zomatoImage = DEFAULT_IMAGE_URL;
+              }
+
               $("<li><img src=" + zomatoImage + " alt='Brewery Image'><div class='caption center-align'><h2>" + zomatoName + "</h2><p>" + zomatoRating + "</p></div></li>").appendTo("#add-content");
 
               $('.slider').slider();//initialize carousel
@@ -242,6 +248,10 @@ $( document ).ready(function(){
 
                   var zomatoImage = results.restaurants[d].restaurant.featured_image;
                   console.log(zomatoImage);
+                  
+                  if (!zomatoImage) {
+                    zomatoImage = DEFAULT_IMAGE_URL;
+                  }
 
                   $("<li><img src=" + zomatoImage + " alt='Brewery Image'><div class='caption center-align'><h2>" + zomatoName + "</h2><p>" + zomatoRating + "</p></div></li>").appendTo("#add-content");
 
