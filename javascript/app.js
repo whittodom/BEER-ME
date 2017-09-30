@@ -135,9 +135,8 @@ $( document ).ready(function(){
       var results = data;
       console.log(results); 
       if ( results.restaurants.length > 0 ){
-
         for (var d = 0; d < results.restaurants.length; d++){
-              //store info from API
+
               var zomatoName = results.restaurants[d].restaurant.name;
               console.log(zomatoName);
 
@@ -147,25 +146,15 @@ $( document ).ready(function(){
               var zomatoImage = results.restaurants[d].restaurant.featured_image;
               console.log(zomatoImage);
 
-
               $("<li><img src=" + zomatoImage + " alt='Brewery Image'><div class='caption center-align'><h2>" + zomatoName + "</h2><p>" + zomatoRating + "</p></div></li>").appendTo("#add-content");
-
-              // if ($(".slider").hasClass('initialized')){
-              //     $(".slider").removeClass('initialized')
-              // }
 
               $('.slider').slider();//initialize carousel
         };
       } else {
         console.log("else");
         for (var e = 0; e < backupImages.length; e++){
-          console.log("for loop is running");
 
               $("<li><img src=" + backupImages[e] + " alt='Backup Image'></li>").appendTo("#add-content");
-
-              // if ($(".slider").hasClass('initialized')){
-              //     $(".slider").removeClass('initialized')
-              // }
 
               $('.slider').slider();//initialize carousel              
         }           
@@ -219,6 +208,58 @@ $( document ).ready(function(){
       default: // not sure
         console.log('no response');
     }
+
+    //Zomato API (for zip codes)
+    $.ajax({
+        type: "GET",
+        headers: {'X-Zomato-API-Key':'3188326edb571cb21760fac9ee7377f0'},//user-key
+        url: 'https://developers.zomato.com/api/v2.1/search', //basic URL
+        dataType: 'json', //wanted response data type
+        data: { //search parameters
+          q: "brewery",
+          count: "5",    
+          radius: 5,  
+          sort: "rating",            
+          lat: lat,
+          lon: long
+        },
+        processData: true,//data is an object; jQuery to construct URL params
+        success: function(data) {
+
+          $("#add-content").empty(); //prevent repetition
+          var results = data;
+          console.log("lat: " + lat + "," + " long: " + long);
+          console.log(results); 
+
+          if ( results.restaurants.length > 0 ){
+            for (var d = 0; d < results.restaurants.length; d++){
+                  
+                  var zomatoName = results.restaurants[d].restaurant.name;
+                  console.log(zomatoName);
+
+                  var zomatoRating = results.restaurants[d].restaurant.user_rating.aggregate_rating;
+                  console.log(zomatoRating);
+
+                  var zomatoImage = results.restaurants[d].restaurant.featured_image;
+                  console.log(zomatoImage);
+
+                  $("<li><img src=" + zomatoImage + " alt='Brewery Image'><div class='caption center-align'><h2>" + zomatoName + "</h2><p>" + zomatoRating + "</p></div></li>").appendTo("#add-content");
+
+                  $('.slider').slider();//initialize carousel
+            };
+          } else {
+           // $("#add-content").empty(); //prevent repetition
+            console.log("else");
+            for (var e = 0; e < backupImages.length; e++){
+
+                  $("<li><img src=" + backupImages[e] + " alt='Backup Image'></li>").appendTo("#add-content");
+
+                  $('.slider').slider();//initialize carousel              
+            }           
+          } //end else statement      
+        } //end success function
+    }); //end ajax 
+
   });
 
 //scroll functions
