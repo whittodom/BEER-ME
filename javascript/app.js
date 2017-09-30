@@ -56,7 +56,7 @@ $( document ).ready(function(){
   $(".parallax").parallax(); //initialize parallax
   $(".button-collapse").sideNav(); //initialize mobile format
   $('select').material_select(); //initialize drop-down menu
-  $('.carousel').carousel(); //initialize carousel
+  $('.slider').slider();//initialize carousel
 
   //modal properties
   $("#modal1").modal({
@@ -116,6 +116,110 @@ $( document ).ready(function(){
   //open modal on doc ready
   $("#modal1").modal("open"); 
 
+  //Zomato API
+  $.ajax({
+    type: "GET",
+    headers: {'X-Zomato-API-Key':'3188326edb571cb21760fac9ee7377f0'},//user-key
+    url: 'https://developers.zomato.com/api/v2.1/search', //basic URL
+    dataType: 'json', //wanted response data type
+    data: { //search parameters
+      q: "brewery",
+      count: "5",    
+      radius: 15,  
+      sort: "rating",            
+      lat: 30.2672,
+      lon: -97.7431
+    },
+    processData: true,//data is an object; jQuery to construct URL params
+    success: function(data) {
+      var results = data;
+      console.log(results); 
+      if ( results.restaurants.length > 0 ){
+
+        for (var d = 0; d < results.restaurants.length; d++){
+              //store info from API
+              var zomatoName = results.restaurants[d].restaurant.name;
+              console.log(zomatoName);
+
+              var zomatoRating = results.restaurants[d].restaurant.user_rating.aggregate_rating;
+              console.log(zomatoRating);
+
+              var zomatoImage = results.restaurants[d].restaurant.featured_image;
+              console.log(zomatoImage);
+
+
+              $("<li><img src=" + zomatoImage + " alt='Brewery Image'><div class='caption center-align'><h2>" + zomatoName + "</h2><p>" + zomatoRating + "</p></div></li>").appendTo("#add-content");
+
+              // if ($(".slider").hasClass('initialized')){
+              //     $(".slider").removeClass('initialized')
+              // }
+
+              $('.slider').slider();//initialize carousel
+        };
+      } else {
+        console.log("else");
+        for (var e = 0; e < backupImages.length; e++){
+          console.log("for loop is running");
+
+              $("<li><img src=" + backupImages[e] + " alt='Backup Image'></li>").appendTo("#add-content");
+
+              // if ($(".slider").hasClass('initialized')){
+              //     $(".slider").removeClass('initialized')
+              // }
+
+              $('.slider').slider();//initialize carousel              
+        }           
+      } //end else statement      
+    } //end success function
+  }); //end ajax
+
+  //global variables 
+  var zipCode;
+  var lat;
+  var long;
+  var href = 0;
+  var backupImages = [
+    "https://i0.wp.com/centraltexasmurals.com/wp-content/uploads/2011/01/greetingsTOPPER_1462-copy.jpg",
+    "http://48tx1q1rrcysi4t7l687xbtt.wpengine.netdna-cdn.com/wp-content/uploads/butter-half-mural.jpg", 
+    "http://media.culturemap.com/crop/67/d4/633x475/Austin-City-Limits-ACL-Music-Festival-sign-2015_120427.jpg", 
+    "http://7c869652befb31196935-4a29ef327f2ff20a96292ed0b00504aa.r10.cf1.rackcdn.com/XLGallery/wes3899wn-178941-Sixth-Street-Mural.jpg",
+    "http://www.longhornhumor.com/wordpress/wp-content/uploads/2015/04/austin-3.jpg"
+  ];
+
+  //locationInput
+  $("#zipCode").change(function(){
+    zipCode = $(this).val();
+    console.log("zip code: " + zipCode);
+    switch (zipCode) {
+      case '78759': //North Austin
+        lat = 30.401356;
+        long = -97.7525352;
+        console.log(lat + " and " + long);
+        break;
+      case '78744': //South Austin
+        lat = 30.196311;
+        long = -97.730807;
+        console.log(lat + " and " + long);
+        break;
+      case '78724': //East Austin
+        lat = 30.2944269;
+        long = -97.6222665;
+        console.log(lat + " and " + long);
+        break;
+      case '78733': //West Austin
+        lat = 30.33151879999999;
+        long = -97.86671820000001;
+        console.log(lat + " and " + long);
+        break;
+      case '78701': //Downtonw Austin
+        lat = 30.2729209;
+        long = -97.74438630000002;
+        console.log(lat + " and " + long);
+        break;
+      default: // not sure
+        console.log('no response');
+    }
+  });
 
 //scroll functions
   $("#mars").on("click", function(){
@@ -190,102 +294,6 @@ $( document ).ready(function(){
     });
 
   $("#quizSubmit").on("click", finalBeer);
-
-  var zipCode; //make global variable
-  var lat;
-  var long;
-
-  //locationInput
-  $("#zipCode").change(function(){
-    zipCode = $(this).val();
-    console.log("zip code: " + zipCode);
-    switch (zipCode) {
-      case '78759': //North Austin
-        lat = 30.401356;
-        long = -97.7525352;
-        console.log(lat + " and " + long);
-        break;
-      case '78744': //South Austin
-        lat = 30.196311;
-        long = -97.730807;
-        console.log(lat + " and " + long);
-        break;
-      case '78724': //East Austin
-        lat = 30.2944269;
-        long = -97.6222665;
-        console.log(lat + " and " + long);
-        break;
-      case '78733': //West Austin
-        lat = 30.33151879999999;
-        long = -97.86671820000001;
-        console.log(lat + " and " + long);
-        break;
-      case '78701': //Downtonw Austin
-        lat = 30.2729209;
-        long = -97.74438630000002;
-        console.log(lat + " and " + long);
-        break;
-      default: // not sure
-        console.log('no response');
-    }
-  });
-
-  //Zomato API
-  $.ajax({
-    type: "GET",
-    headers: {'X-Zomato-API-Key':'3188326edb571cb21760fac9ee7377f0'},//user-key
-    url: 'https://developers.zomato.com/api/v2.1/search', //basic URL
-    dataType: 'json', //wanted response data type
-    data: { //search parameters
-      q: "brewery",
-      count: "5",    
-      radius: 15,  
-      sort: "rating",            
-      lat: 30.2672,
-      lon: -97.7431
-    },
-    processData: true,//data is an object; jQuery to construct URL params
-    success: function(data) {
-      var results = data;
-      console.log(results); 
-
-      for (var d = 0; d < results.restaurants.length; d++){
-
-        //store info from API
-        var zomatoName = results.restaurants[d].restaurant.name;
-        console.log(zomatoName);
-
-        var zomatoRating = results.restaurants[d].restaurant.user_rating.aggregate_rating;
-        console.log(zomatoRating);
-
-        var zomatoImage = results.restaurants[d].restaurant.featured_image;
-        console.log(zomatoImage);
-
-        //create elements
-        var carouselBreweryDiv = $("<div>")
-        .attr({
-          href: "",
-          class: "carousel-fixed-item center"
-        });
-
-        var carouselBreweryName = $("<h2>" + zomatoName + "</h2>")
-        .attr("id", "brewery-name");
-
-        var carouselBreweryRating = $("<p>" + zomatoRating + "</p>")
-        .attr("id", "brewery-rating");
-
-        var carouselBreweryImage = $("<img>")
-        .attr({
-          src: zomatoImage,
-          id: "brewery-image"
-        });
-
-        //append to div
-        $(".add-content").html(carouselBreweryDiv + carouselBreweryName + carouselBreweryRating + carouselBreweryImage);
-
-      } //end for loop
-    } //end success function
-  }); //end ajax
 
 });//end of doc ready wrapper
 
